@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/nuar/Projects/Eclipse/IPK_04_Statistics/source/tool/uniform.cc
+iostream
+-
+vector
+-
+cmath
+-
+io.hh
+/home/nuar/Projects/Eclipse/IPK_04_Statistics/source/tool/io.hh
+statistics.h
+/home/nuar/Projects/Eclipse/IPK_04_Statistics/source/tool/statistics.h
+
+source/include/io.hh
+vector
+-
+
+source/include/statistics.h
+vector
+-
+

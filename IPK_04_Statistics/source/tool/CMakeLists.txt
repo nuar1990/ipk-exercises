@@ -1,0 +1,6 @@
+add_executable(readvector readvector.cc)
+add_executable(normal normal.cc)
+add_executable(uniform uniform.cc)
+target_link_libraries(readvector statistics)
+target_link_libraries(normal statistics)
+target_link_libraries(uniform statistics)

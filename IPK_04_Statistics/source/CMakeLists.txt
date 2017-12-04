@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.1)
+project(IPK_04_Statistics)
+set(CMAKE_CXX_STANDARD 14)
+include_directories("include")
+add_subdirectory(tool)
+add_subdirectory(lib)
