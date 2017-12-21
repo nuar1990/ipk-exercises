@@ -8,6 +8,8 @@
 #ifndef ITERATIONRESULT_HH_
 #define ITERATIONRESULT_HH_
 #include "point.hh"
+#include <cmath>
+#include <iostream>
 
 class IterationResult {
 private:
