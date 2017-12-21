@@ -26,11 +26,6 @@ void mandelbrot(Canvas& canvas , double threshold, int maxIt, std::string filena
 }
 
 int main(){
-	//IterationResult result=IterationResult();
-	//Point c=Point(-0.2,0.9);
-	//Point z=Point();
-	//result=result.iterate(z,c,2.0,100);
-	//std::cout<<result.iterations()<<std::endl;
 	Point center=Point(-1,0);
 	Canvas picture=Canvas(center,4,3,4000,3000);
 	mandelbrot(picture,2,2000,"mandelbrot.pgm");
