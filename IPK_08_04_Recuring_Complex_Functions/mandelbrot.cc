@@ -26,6 +26,45 @@ std::unique_ptr<IterationResult> Mandelbrot::iterate(Point z,Point c, double thr
 	return result;
 }
 
+void Mandelbrot::mandelbrot(Canvas& canvas , double threshold, int maxIt, std::string filename, bool smooth){
+	IterationResult result=IterationResult();
+	Point z=Point();
+
+	for(int i=0;i<canvas.horPixels();i++){
+		for(int j=0;j<canvas.vertPixels();j++){
+			result=*iterate(z,canvas.coord(i,j),threshold,maxIt);
+			if(result.iterations()>0 && result.iterations()<maxIt){
+				if(smooth&& i!=0 && j!=0){
+					double k=result.iterations()-log2(log(sqrt(pow(result.lastTrack().x(),2)+
+							(result.lastTrack().y(),2)))/log(threshold));
+					canvas(i,j)= k;
+				}
+				else canvas(i,j)=log10(result.iterations())*100;
+			}
+		}
+	}
+	canvas.write(filename);
+}
+
+void Mandelbrot::julia(Point c,Canvas& canvas, double threshold, int maxIt, std::string filename, bool smooth){
+	IterationResult result=IterationResult();
+
+	for(int i=0;i<canvas.horPixels();i++){
+		for(int j=0;j<canvas.vertPixels();j++){
+			result=*iterate(canvas.coord(i,j),c,threshold,maxIt);
+			if(result.iterations()>0 && result.iterations()<maxIt){
+				if(smooth&& i!=0 && j!=0){
+					double k=result.iterations()-log2(log(sqrt(pow(result.lastTrack().x(),2)+
+							(result.lastTrack().y(),2)))/log(threshold));
+					canvas(i,j)= k;
+				}
+				else canvas(i,j)=log10(result.iterations())*100;
+			}
+		}
+	}
+	canvas.write(filename);
+}
+
 void Mandelbrot::calc(){
 	std::cout<<"Mandelbrot"<<std::endl;
 }

@@ -8,6 +8,11 @@
 #ifndef COMPLEX_POLY_HH_
 #define COMPLEX_POLY_HH_
 #include "iterationResult.hh"
+#include <iostream>
+#include <string>
+#include "histogram.hh"
+#include "pgm.hh"
+#include "canvas.hh"
 /*
  * Abstract class drawing the design of a complex polygon
  * inheriting classes implement the method iterate.
@@ -19,6 +24,7 @@ public:
 	Complex_Poly();
 	virtual std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt)=0;
 	virtual void calc()=0;
+	virtual void rescale(std::string filename);
 	virtual ~Complex_Poly();
 };
 

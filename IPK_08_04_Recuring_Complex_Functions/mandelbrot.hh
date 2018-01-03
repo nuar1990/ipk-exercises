@@ -9,7 +9,6 @@
 #define MANDELBROT_HH_
 
 #include "iterationResult.hh"
-#include "mandelbrot.hh"
 #include "complex_poly.hh"
 class Mandelbrot: public Complex_Poly {
 public:
@@ -17,6 +16,9 @@ public:
 	virtual ~Mandelbrot();
 	std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt);
 	void calc();
+	void mandelbrot(Canvas& canvas , double threshold, int maxIt, std::string filename, bool smooth=false);
+	void julia(Point c,Canvas& canvas, double threshold, int maxIt, std::string filename, bool smooth=false);
+
 };
 
 #endif /* MANDELBROT_HH_ */
