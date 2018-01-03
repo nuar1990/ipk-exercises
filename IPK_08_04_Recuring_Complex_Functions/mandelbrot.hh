@@ -10,12 +10,12 @@
 
 #include "iterationResult.hh"
 #include "mandelbrot.hh"
-
-class Mandelbrot: public IterationResult {
+#include "complex_poly.hh"
+class Mandelbrot: public Complex_Poly {
 public:
 	Mandelbrot();
 	virtual ~Mandelbrot();
-	IterationResult* iterate(Point z,Point c, double threshold, int maxIt);
+	std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt);
 	void calc();
 };
 

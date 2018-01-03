@@ -10,6 +10,7 @@
 #include <iostream>
 #include "point.hh"
 #include <cmath>
+#include <memory>
 
 class IterationResult {
 private:
@@ -22,8 +23,6 @@ public:
 	Point lastTrack() const;
 	void operator++(int);
 	void setLastTrack(Point& lastTrack);
-	virtual IterationResult* iterate(Point z,Point c, double threshold, int maxIt)=0;
-	virtual void calc();
 };
 
 #endif /* ITERATIONRESULT_HH_ */

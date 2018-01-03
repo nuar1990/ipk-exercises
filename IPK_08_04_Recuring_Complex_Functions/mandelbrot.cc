@@ -7,12 +7,12 @@
 
 #include "mandelbrot.hh"
 
-Mandelbrot::Mandelbrot():IterationResult(){}
+Mandelbrot::Mandelbrot():Complex_Poly(){}
 
 Mandelbrot::~Mandelbrot() {}
 
-IterationResult* Mandelbrot::iterate(Point z,Point c, double threshold, int maxIt){
-	IterationResult result=IterationResult();
+std::unique_ptr<IterationResult> Mandelbrot::iterate(Point z,Point c, double threshold, int maxIt){
+	std::unique_ptr<IterationResult> result(new IterationResult);
 	if(std::abs(c.x())>threshold || std::abs(c.y())>threshold ) return result;
 	for(int i=0;i<maxIt;i++){
 		//std::cout<<"x: "<<z.x()<<" "<<" y: "<<z.y()<<std::endl;
@@ -20,8 +20,8 @@ IterationResult* Mandelbrot::iterate(Point z,Point c, double threshold, int maxI
 			break;
 		}
 		z=Point(pow(z.x(),2)-pow(z.y(),2)+c.x(),2*z.x()*z.y()+c.y());
-		result++;
-		result.setLastTrack(z);
+		(*result)++;
+		result->setLastTrack(z);
 	}
 	return result;
 }

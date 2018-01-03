@@ -30,8 +30,3 @@ void IterationResult::operator++(int){
 void IterationResult::setLastTrack(Point& lastTrack){
 	_lastTrack=lastTrack;
 }
-
-
-void IterationResult::calc(){
-	std::cout<<"Iteration Result"<<std::endl;
-}

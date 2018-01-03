@@ -9,12 +9,14 @@
 #define NEWTONFRACTAL_HH_
 
 #include "iterationResult.hh"
+#include "complex_poly.hh"
 #include <iostream>
 
-class Newton_Fractal: public virtual IterationResult {
+class Newton_Fractal: public virtual Complex_Poly {
 public:
 	Newton_Fractal();
 	virtual ~Newton_Fractal();
+	std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt);
 	void calc();
 };
 
