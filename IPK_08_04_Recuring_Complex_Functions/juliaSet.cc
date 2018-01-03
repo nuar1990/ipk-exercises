@@ -1,17 +1,21 @@
 /*
- * mandelbrot.cpp
+ * juliaSet.cc
  *
- *  Created on: Dec 26, 2017
+ *  Created on: Jan 3, 2018
  *      Author: nuar
  */
 
-#include "mandelbrot.hh"
+#include "juliaSet.hh"
 
-Mandelbrot::Mandelbrot():Complex_Poly(){}
+Julia_Set::Julia_Set():Complex_Poly() {
+	// TODO Auto-generated constructor stub
 
-Mandelbrot::~Mandelbrot() {}
+}
 
-std::unique_ptr<IterationResult> Mandelbrot::iterate(Point z,Point c, double threshold, int maxIt){
+Julia_Set::~Julia_Set() {
+	// TODO Auto-generated destructor stub
+}
+std::unique_ptr<IterationResult> Julia_Set::iterate(Point z,Point c, double threshold, int maxIt){
 	std::unique_ptr<IterationResult> result(new IterationResult);
 	if(std::abs(c.x())>threshold || std::abs(c.y())>threshold ) return result;
 	for(int i=0;i<maxIt;i++){
@@ -26,14 +30,13 @@ std::unique_ptr<IterationResult> Mandelbrot::iterate(Point z,Point c, double thr
 	return result;
 }
 
-void Mandelbrot::draw(Canvas& canvas , double threshold, int maxIt, std::string filename, bool smooth){
-	std::cout<<"Drawing Mandelbrot, please wait...";
+void Julia_Set::draw(Point c,Canvas& canvas, double threshold, int maxIt, std::string filename, bool smooth){
+	std::cout<<"Drawing Julia_Set, please wait...";
 	IterationResult result=IterationResult();
-	Point z=Point();
 
 	for(int i=0;i<canvas.horPixels();i++){
 		for(int j=0;j<canvas.vertPixels();j++){
-			result=*iterate(z,canvas.coord(i,j),threshold,maxIt);
+			result=*iterate(canvas.coord(i,j),c,threshold,maxIt);
 			if(result.iterations()>0 && result.iterations()<maxIt){
 				if(smooth&& i!=0 && j!=0){
 					double k=result.iterations()-log2(log(sqrt(pow(result.lastTrack().x(),2)+
@@ -47,4 +50,3 @@ void Mandelbrot::draw(Canvas& canvas , double threshold, int maxIt, std::string 
 	canvas.write(filename);
 	std::cout<<"Done."<<std::endl;
 }
-

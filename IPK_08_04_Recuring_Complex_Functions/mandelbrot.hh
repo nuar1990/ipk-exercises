@@ -15,10 +15,7 @@ public:
 	Mandelbrot();
 	virtual ~Mandelbrot();
 	std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt);
-	void calc();
-	void mandelbrot(Canvas& canvas , double threshold, int maxIt, std::string filename, bool smooth=false);
-	void julia(Point c,Canvas& canvas, double threshold, int maxIt, std::string filename, bool smooth=false);
-
+	void draw(Canvas& canvas , double threshold, int maxIt, std::string filename, bool smooth=false);
 };
 
 #endif /* MANDELBROT_HH_ */

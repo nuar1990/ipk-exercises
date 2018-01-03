@@ -23,7 +23,6 @@ class Complex_Poly {
 public:
 	Complex_Poly();
 	virtual std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt)=0;
-	virtual void calc()=0;
 	virtual void rescale(std::string filename);
 	virtual ~Complex_Poly();
 };
