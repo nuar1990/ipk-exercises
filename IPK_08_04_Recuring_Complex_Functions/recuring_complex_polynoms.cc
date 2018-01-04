@@ -12,12 +12,12 @@
 
 int main(){
 	Mandelbrot hallo=Mandelbrot();
-	Newton_Fractal hallo2=Newton_Fractal();
+	//Newton_Fractal hallo2=Newton_Fractal();
 
 
 	Point center=Point(-1,0);
 	Canvas picture=Canvas(center,4,3,4000,3000);
-	hallo.draw(picture,2,1000,"mandelbrot.pgm",0);
+	hallo.draw(picture,2,1000,"mandelbrot.pgm");
 	//mandelbrot(picture,2,1000,"mandelbrot_smooth.pgm",true);
 
 }
