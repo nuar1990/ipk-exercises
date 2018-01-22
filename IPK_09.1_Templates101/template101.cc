@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <algorithm>
-#include <vector>
 
 template <typename T>
 void swap(T& a,T& b);
