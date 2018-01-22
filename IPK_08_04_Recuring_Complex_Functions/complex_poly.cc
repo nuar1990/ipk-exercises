@@ -16,25 +16,16 @@ Complex_Poly::~Complex_Poly() {
 	// TODO Auto-generated destructor stub
 }
 
-void Complex_Poly::rescale(std::string filename){
-	Histogram hist=Histogram();
-	std::vector<std::vector<int> > grayScaleValues=read_pgm(filename);
-	for(auto y:grayScaleValues){
-		for(auto x:y){
-			if(x!=0)hist.insert(x);
+IterationResult Complex_Poly::iterate(Point z,Point c, double threshold, int maxIt){
+	IterationResult result=IterationResult();
+	if(std::abs(c.x())>threshold || std::abs(c.y())>threshold ) return result;
+	for(int i=0;i<maxIt;i++){
+		if(std::abs(z.x())>threshold || std::abs(z.y())>threshold){
+			break;
 		}
+		z=*recurance(z,c);
+		result++;
+		result.setLastTrack(z);
 	}
-	hist.cutDataSet(5);
-	int min=hist.min();
-	int max=hist.max();
-	for(auto& row:grayScaleValues){
-		int i=0;
-		for(auto& col:row){
-			if(col<=min+1)row[i]=0;
-			if(col>min+1&&col<max-1) row[i]=255*(col/max);
-			if(col>=max-1)row[i]=255;
-			i++;
-		}
-	}
-	write_pgm(grayScaleValues,"rescaled_"+filename);
+	return result;
 }

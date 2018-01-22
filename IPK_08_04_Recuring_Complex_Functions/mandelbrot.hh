@@ -14,7 +14,7 @@ class Mandelbrot: public Complex_Poly {
 public:
 	Mandelbrot();
 	virtual ~Mandelbrot();
-	std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt);
+	std::unique_ptr<Point> recurance(Point& z, Point& c);
 	void draw(Canvas& canvas , double threshold, int maxIt, std::string filename, bool smooth=false);
 };
 

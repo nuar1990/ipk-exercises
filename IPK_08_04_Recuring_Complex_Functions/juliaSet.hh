@@ -13,7 +13,7 @@
 class Julia_Set: public virtual Complex_Poly {
 public:
 	Julia_Set();
-	std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt);
+	std::unique_ptr<Point> recurance(Point& z, Point& c);
 	virtual ~Julia_Set();
 	void draw(Point c,Canvas& canvas, double threshold, int maxIt, std::string filename, bool smooth=false);
 };

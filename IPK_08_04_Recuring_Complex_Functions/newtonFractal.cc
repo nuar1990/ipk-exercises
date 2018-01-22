@@ -11,9 +11,9 @@ Newton_Fractal::Newton_Fractal():Complex_Poly() {}
 
 Newton_Fractal::~Newton_Fractal() {}
 
-std::unique_ptr<IterationResult> Newton_Fractal::iterate(Point z,Point c, double threshold, int maxIt){
-	std::unique_ptr<IterationResult> result(new IterationResult());
 
-	return result;
+std::unique_ptr<Point> Newton_Fractal::recurance(Point& z, Point& c){
+	//ToDo: implement recurance
+	z=Point(pow(z.x(),2)-pow(z.y(),2)+c.x(),2*z.x()*z.y()+c.y());
+	return std::make_unique<Point>(z);
 }
-

@@ -11,29 +11,19 @@ Mandelbrot::Mandelbrot():Complex_Poly(){}
 
 Mandelbrot::~Mandelbrot() {}
 
-std::unique_ptr<IterationResult> Mandelbrot::iterate(Point z,Point c, double threshold, int maxIt){
-	std::unique_ptr<IterationResult> result(new IterationResult);
-	if(std::abs(c.x())>threshold || std::abs(c.y())>threshold ) return result;
-	for(int i=0;i<maxIt;i++){
-		//std::cout<<"x: "<<z.x()<<" "<<" y: "<<z.y()<<std::endl;
-		if(std::abs(z.x())>threshold || std::abs(z.y())>threshold){
-			break;
-		}
-		z=Point(pow(z.x(),2)-pow(z.y(),2)+c.x(),2*z.x()*z.y()+c.y());
-		(*result)++;
-		result->setLastTrack(z);
-	}
-	return result;
+std::unique_ptr<Point> Mandelbrot::recurance(Point& z, Point& c){
+	z=Point(pow(z.x(),2)-pow(z.y(),2)+c.x(),2*z.x()*z.y()+c.y());
+	return std::make_unique<Point>(z);
 }
 
 void Mandelbrot::draw(Canvas& canvas , double threshold, int maxIt, std::string filename, bool smooth){
-	std::cout<<"Drawing Mandelbrot, please wait...";
+	std::cout<<"Drawing Mandelbrot, please wait..."<<std::endl;
 	IterationResult result=IterationResult();
 	Point z=Point();
 
 	for(int i=0;i<canvas.horPixels();i++){
 		for(int j=0;j<canvas.vertPixels();j++){
-			result=*iterate(z,canvas.coord(i,j),threshold,maxIt);
+			result=iterate(z,canvas.coord(i,j),threshold,maxIt);
 			if(result.iterations()>0 && result.iterations()<maxIt){
 				if(smooth&& i!=0 && j!=0){
 					double k=result.iterations()-log2(log(sqrt(pow(result.lastTrack().x(),2)+

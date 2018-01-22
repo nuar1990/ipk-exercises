@@ -16,7 +16,7 @@ class Newton_Fractal: public virtual Complex_Poly {
 public:
 	Newton_Fractal();
 	virtual ~Newton_Fractal();
-	std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt);
+	std::unique_ptr<Point> recurance(Point& z, Point& c);
 	void calc();
 };
 

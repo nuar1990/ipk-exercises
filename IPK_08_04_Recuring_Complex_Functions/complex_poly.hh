@@ -22,8 +22,8 @@
 class Complex_Poly {
 public:
 	Complex_Poly();
-	virtual std::unique_ptr<IterationResult> iterate(Point z,Point c, double threshold, int maxIt)=0;
-	virtual void rescale(std::string filename);
+	IterationResult iterate(Point z,Point c, double threshold, int maxIt);
+	virtual std::unique_ptr<Point> recurance(Point& z, Point& c)=0;
 	virtual ~Complex_Poly();
 };
 
