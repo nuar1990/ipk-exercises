@@ -18,56 +18,41 @@ bool cleanup(char &c){
 	else c=std::toupper(c);
 	return true;
 }
-template <typename Map> void print_frequencies_sorted(const Map& map){
+
+template <typename Map>
+void print_frequencies_sorted(const Map& map){
 	Map frequencies=map;
-	while(1){
-		//read input
-		typename Map::key_type key;
-		std::cin>>key;
-		//abort if input is closed
-		if(not std::cin) break;
-		//overloaded cleanup function
-		if(!cleanup(key))continue;
-
-		bool exist=false;
-		for(auto& entry:frequencies){
-			if(entry.first==key){
-				entry.second+=1;
-				exist=true;
-				break;
-			}
-		}
-		if(!exist) frequencies.insert(std::pair<typename Map::key_type,int>(key,1));
+	typename Map::key_type key;
+	std::vector<std::pair<int,typename Map::key_type>> tokens;
+	//reading in data
+	while(std::cin>>key){
+		//specialized function
+		if(!cleanup(key)) continue;
+		typename Map::iterator iter=frequencies.find(key);
+		if(iter==frequencies.end()) frequencies.insert(std::pair<typename Map::key_type,int>(key,1));
+		else iter->second++;
 	}
-
-	/* Sorting by Value by inverting key/value in ordered map*/
-	long int sum=0;
-	std::map<int,typename Map::key_type,std::greater<int>> orderedMap;
+	//pushing data into vector
 	for(auto entry:frequencies){
-		sum+=entry.second;
-		orderedMap.insert(std::pair<int,typename Map::key_type>(entry.second,entry.first));
+		tokens.emplace_back(entry.second,entry.first);
 	}
-	for(auto entry:orderedMap){
-		std::cout<<entry.second<<": "<<std::internal<<std::setw(30)<<((double)entry.first/sum)*100<<"%"<<std::endl;
-	}
-	if(std::is_same<typename Map::key_type,char>::value) std::cout<<"characters counted: "<<sum<<std::endl<<std::endl;
-	else std::cout<<"words counted: " <<sum<<std::endl<<std::endl;
+	//and sort it
+	std::sort(tokens.begin(),tokens.end());
 
-	Histogram histo=Histogram();
-	for(auto entry:frequencies){
-		histo.insert(entry.second);
+	//now print
+	for(auto entry:tokens){
+		std::cout<<(double)entry.first/tokens.size()*100<<"%  "<<std::setw(30)<<entry.second<<std::endl;
 	}
-	histo.print(frequencies.size());
 
 }
 
 int main(){
-	//std::map<char,int> frequencies;
-	std::map<std::string,int> frequencies;
-	//std::unordered_map<char,int> frequencies;
-	//std::unordered_map<std::string,int> frequencies;
+	std::map<char,int> frequencies_a;
+	std::map<std::string,int> frequencies_b;
+	std::unordered_map<char,int> frequencies_c;
+	std::unordered_map<std::string,int> frequencies_d;
 
-	print_frequencies_sorted(frequencies);
+	print_frequencies_sorted(frequencies_d);
 
 	return 0;
 
